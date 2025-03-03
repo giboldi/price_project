@@ -1,0 +1,29 @@
+Tablas y Relaciones
+productos (Entidad principal)
+
+id (PK, int)
+nombre (string)
+descripcion (string)
+categoria_id (FK, int) → Referencia a categorias
+precio (float)
+stock (int)
+categorias (Dimensión)
+
+id (PK, int)
+nombre (string)
+usuarios (Dimensión)
+
+id (PK, int)
+nombre (string)
+email (string)
+ventas (Tabla de hechos)
+
+id (PK, int)
+producto_id (FK, int) → Referencia a productos
+usuario_id (FK, int) → Referencia a usuarios
+cantidad (int)
+fecha (datetime)
+Relaciones:
+La tabla productos tiene una relación muchos a uno con categorias.
+La tabla ventas tiene una relación muchos a uno con productos.
+La tabla ventas tiene una relación muchos a uno con usuarios.

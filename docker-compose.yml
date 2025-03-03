@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: data_warehouse
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  typesense:
+    image: typesense/typesense:latest
+    container_name: typesense
+    restart: always
+    command: "--data-dir /data --api-key=xyz"
+    environment:
+      TYPESENSE_API_KEY: xyz
+    ports:
+      - "8108:8108"
+    volumes:
+      - typesense_data:/data
+
+  api:
+    build: .
+    container_name: fastapi_app
+    restart: always
+    depends_on:
+      - db
+      - typesense
+    environment:
+      DATABASE_URL: postgresql://user:password@db:5432/data_warehouse
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+
+volumes:
+  postgres_data:
+  typesense_data:
