@@ -63,6 +63,3 @@ Para ejecutar las pruebas, correr:
 pytest
 ```
 
-## **7. Conclusión**
-Este proyecto demuestra habilidades en arquitectura de datos, optimización de búsqueda y desarrollo de APIs escalables. La combinación de **SQL, VectorDB y FastAPI** permite una solución robusta y eficiente.
-
